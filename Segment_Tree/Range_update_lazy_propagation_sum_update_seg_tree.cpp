@@ -90,9 +90,8 @@ public:
 
 };
 
-
 int main(){
-	#ifndef ONLINE_JUDGE
+    #ifndef ONLINE_JUDGE
     freopen("input.txt", "r", stdin);
     freopen("output.txt", "w", stdout);
     #endif
@@ -125,12 +124,13 @@ int main(){
 
 		}
 		else {
-			int l , r;
-			cin >>  l >> r;
-			--l;
-			--r;
-			cout << s1.query(arr, 0 , 0 , n - 1, l , r) << endl;
+			//asked to find the value at index k;
+			int k;
+			cin >> k;
+			k--;
+			unsigned long long  a = s1.query(arr, 0 , 0, n - 1, 0, k);
+			unsigned long long b = s1.query(arr, 0 , 0 , n - 1, 0, k - 1);
+			cout << a - b << endl;
 		}
 	}
-
 }
