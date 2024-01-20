@@ -34,6 +34,9 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
+
+    
+
 struct Math {
 
     Math(){}
@@ -200,7 +203,7 @@ struct Math {
     // print all permutation of an array
 
     void Print_Permutation(vector < int >& nums){
-        sort(all(nums));
+        sort(nums.begin(), nums.end());
         do {
             for(auto& i : nums)
                 cout << i << " ";
@@ -211,7 +214,7 @@ struct Math {
     // print all permutation of a string
 
     void Print_Permutation(string s){
-        sort(all(s));
+        sort(s.begin(), s.end());
         do {
             cout << s << "\n";
         } while(next_permutation(s.begin(), s.end()));
@@ -351,7 +354,7 @@ struct Math {
         auto val = [](char c){
             return (c >= '0' && c <= '9' ? (int) c - '0' : (int) c - 'A' + 10);
         };
-        ll len = sz(str), power = 1, num = 0, i;
+        ll len = int(str.size()), power = 1, num = 0, i;
         for (i = len - 1; i >= 0; i--) {
             num += val(str[i]) * power;
             power = power * base;
@@ -360,6 +363,7 @@ struct Math {
     }
 
 };
+
 
 void Solve(){
     
