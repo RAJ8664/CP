@@ -16,7 +16,7 @@ public:
 		//update if any updates are remaining;
 		if(lazy[ind] != 0){
 			seg[ind] += (high - low + 1) * lazy[ind];
-			//propagate down if the is children;
+			//propagate down if there is children;
 			if(low != high){
 				lazy[2 * ind + 1] += lazy[ind];
 				lazy[2 * ind + 2] += lazy[ind]; 
