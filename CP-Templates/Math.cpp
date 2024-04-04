@@ -43,7 +43,7 @@ struct Math {
 
     //count number from 1 to n such that gcd(that number , n) is 1;
     long long phi(long long n) {
-        long long res = 1;
+        long long res = n;
         for(int i = 2; i * i <= n; i++) {
             if(n % i == 0) {
                 while(n % i == 0) {
