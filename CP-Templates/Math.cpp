@@ -172,7 +172,7 @@ struct Math {
 
     bool is_prime(ll n){
         if(n < 2 || (n % 2 == 0 && n != 2)) return false;
-        for(int i = 3; i <= sqrt(n); i += 2)
+        for(int i = 3; i * i <= n; i += 2)
             if(n % i == 0) return false;
         return true;
     }
@@ -181,7 +181,7 @@ struct Math {
 
     int number_of_divisors(ll n){
         int divisors = 0;
-        for(int i = 1; i < sqrt(n); i++)
+        for(int i = 1; i * i < n; i++)
             if(n % i == 0) divisors += 2;
         return divisors + (sqrt(n) == (int)sqrt(n));
     }
@@ -190,7 +190,7 @@ struct Math {
 
     ll sum_of_divisors(ll n){
         ll sum_divisors = 0;
-        for(int i = 1; i < sqrt(n); i++)
+        for(int i = 1; i * i < n; i++)
             if(n % i == 0) sum_divisors += ((n / i) + i);
         ll sq = sqrt(n);
         return sum_divisors + (sq * sq == n ? sq : 0);
@@ -199,7 +199,7 @@ struct Math {
     // sum of divisor of number in range [1 ... n]
     ll divisorSum(ll num){
         ll sum = 0;
-        for (ll i = 1; i <= sqrt(num); i++) {
+        for (ll i = 1; i * i <= num; i++) {
             ll t1 = i * (num / i - i + 1);
             ll t2 = (((num / i) * (num / i + 1)) / 2) - ((i * (i + 1)) / 2);
             sum += t1 + t2;
@@ -212,7 +212,7 @@ struct Math {
 
     vector < ll > Get_Divisors(ll n){
         vector < ll > divisors;
-        for(int i = 1; i < sqrt(n); i++)
+        for(int i = 1; i * i < n; i++)
             if(n % i == 0) divisors.push_back(i), divisors.push_back(n / i);
         if(sqrt(n) == int(sqrt(n))) divisors.push_back(sqrt(n));
         return divisors;
