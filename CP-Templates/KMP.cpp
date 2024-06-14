@@ -35,12 +35,6 @@ template < typename T = int > ostream& operator << (ostream &out, const vector <
     return out;
 }
 
-void AhMeD_HoSSaM(){
-    ios_base::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-    #ifndef ONLINE_JUDGE
-        freopen("input.txt", "r", stdin), freopen("output.txt", "w", stdout);
-    #endif
-}
 
 vector < int > Compute_Prefix(string pat){
     vector < int > longest_prefix(sz(pat));
@@ -69,7 +63,6 @@ void Solve(){
 }
 
 int main(){
-    AhMeD_HoSSaM();
     int t = 1;
     //cin >> t;
     while(t--)
