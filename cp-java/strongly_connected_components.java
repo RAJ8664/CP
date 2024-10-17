@@ -27,31 +27,28 @@ public class strongly_connected_components {
     	int n = sc.nextInt();
         adj = new ArrayList<>();
         for (int i = 0; i <= n + 1; i++) adj.add(new ArrayList<>());
-		cost = new int[n + 1];
-		for (int i = 1; i <= n; i++) cost[i] = sc.nextInt();
-		int m = sc.nextInt();
-		for (int i = 0; i < m; i++) {
-			int u = sc.nextInt(), v = sc.nextInt();
-			adj.get(u).add(v);
-		}        
+	cost = new int[n + 1];
+	for (int i = 1; i <= n; i++) cost[i] = sc.nextInt();
+	int m = sc.nextInt();
+	for (int i = 0; i < m; i++) {
+		int u = sc.nextInt(), v = sc.nextInt();
+		adj.get(u).add(v);
+	}        
 
-		//find List of all the strongly connected components;
-		ArrayList<ArrayList<Integer>> connected_components = new ArrayList<>();
-		connected_components = connected_components(n , adj);
-		dbg.print(connected_components);
-		
-		long ways = 1;
-		long total_cost = 0;
-		for (ArrayList<Integer> curr : connected_components) {
-			int mini = Integer.MAX_VALUE;
-			int count = 0;
-			for (int ele : curr) mini = min(mini, cost[ele]);
-			for (int ele : curr) if (cost[ele] == mini) count++;
-			total_cost += mini;
-    		ways = mul(ways, count);
-    	}
-        out.println(total_cost + " " + ways); 
-    	
+	//find List of all the strongly connected components;
+	ArrayList<ArrayList<Integer>> connected_components = new ArrayList<>();
+	connected_components = connected_components(n , adj);
+	long ways = 1;
+	long total_cost = 0;
+	for (ArrayList<Integer> curr : connected_components) {
+		int mini = Integer.MAX_VALUE;
+		int count = 0;
+		for (int ele : curr) mini = min(mini, cost[ele]);
+		for (int ele : curr) if (cost[ele] == mini) count++;
+		total_cost += mini;
+		ways = mul(ways, count);
+	}
+	out.println(total_cost + " " + ways); 
     }
 
 
