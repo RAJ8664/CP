@@ -1,98 +1,74 @@
 import java.util.*;
 
 public class Debugger {
-    public static void print(Object dataStructure) {
-        if (dataStructure instanceof Collection) {
-            printCollection((Collection<?>) dataStructure);
-        } else if (dataStructure instanceof int[][]) {
-            printMatrix((int[][]) dataStructure);
-        }
-
-        else if (dataStructure instanceof Map) {
-            printMap((Map<?, ?>) dataStructure);
-        } else if (dataStructure.getClass().isArray()) {
-            printArray(dataStructure);
-        } else if (dataStructure instanceof Queue) {
-            printQueue((Queue<?>) dataStructure);
-        } else if (dataStructure instanceof Stack) {
-            printStack((Stack<?>) dataStructure);
-        } else {
-            System.out.print(dataStructure + " ");
-        }
-    }
-
-    public static void printCollection(Collection<?> collection) {
-        System.out.print("Collection: ");
-        for (Object item : collection) {
-            print(item);
-        }
-    }
-
-    public static void printMap(Map<?, ?> map) {
-        System.out.print("Map: ");
-        for (Map.Entry<?, ?> entry : map.entrySet()) {
-            System.out.print("(");
-            print(entry.getKey());
-            System.out.print("->");
-            print(entry.getValue());
-            System.out.print(") ");
-        }
-    }
-
-    public static void printArray(Object array) {
-        System.out.print("Array: [");
-        int length = java.lang.reflect.Array.getLength(array);
-        for (int i = 0; i < length; i++) {
-            print(java.lang.reflect.Array.get(array, i));
-            if (i < length - 1) {
-                System.out.print(", ");
+    static class Debug {
+        public static boolean LOCAL = getLocal();
+        public static boolean getLocal() {
+            try {
+                return System.getProperty("LOCAL") == null;
+            }catch(SecurityException e) {
+                return false;
             }
         }
-        System.out.print("] ");
-    }
-
-    public static void printQueue(Queue<?> queue) {
-        System.out.print("Queue: [");
-        for (Object item : queue) {
-            print(item);
-            System.out.print(" ");
-        }
-        System.out.print("] ");
-    }
-
-    public static void printStack(Stack<?> stack) {
-        System.out.print("Stack: [");
-        for (Object item : stack) {
-            print(item);
-            System.out.print(" ");
-        }
-        System.out.print("] ");
-    }
-    public static void printMatrix(int[][] matrix) {
-        System.out.println("Matrix: ");
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[0].length; j++){
-                System.out.print(matrix[i][j] + " ");
+        public static <T> String ts(T t) {
+            if(t==null) {
+                return "null";
             }
-            System.out.println();
-        }
-    }
-
-    public static void printArrayList(ArrayList<Integer> ans){
-        System.out.print("ArrayList : ");
-        for(int i = 0; i < ans.size(); i++){
-            print(ans.get(i) + " ");
-        }
-        System.out.println();
-    }
-
-    public static void printArrayListofArrayList(ArrayList<ArrayList<Integer>> ans){
-        System.out.print("ArrayList: ");
-        for(ArrayList<Integer> current : ans){
-            for(int i = 0; i < current.size(); i++){
-                print(current.get(i) + " ");
+            if(t instanceof Iterable) {
+                return ts((Iterable<?>) t);
+            }else if(t instanceof int[]) {
+                String s = Arrays.toString((int[]) t);
+                return "{"+s.substring(1, s.length()-1)+"}";
+            }else if(t instanceof long[]) {
+                String s = Arrays.toString((long[]) t);
+                return "{"+s.substring(1, s.length()-1)+"}";
+            }else if(t instanceof char[]) {
+                String s = Arrays.toString((char[]) t);
+                return "{"+s.substring(1, s.length()-1)+"}";
+            }else if(t instanceof double[]) {
+                String s = Arrays.toString((double[]) t);
+                return "{"+s.substring(1, s.length()-1)+"}";
+            }else if(t instanceof boolean[]) {
+                String s = Arrays.toString((boolean[]) t);
+                return "{"+s.substring(1, s.length()-1)+"}";
+            }else if(t instanceof Object[]) {
+                return ts((Object[]) t);
             }
-            System.out.println();
+            return t.toString();
+        }
+        private static <T> String ts(T[] arr) {
+            StringBuilder ret = new StringBuilder();
+            ret.append("{");
+            boolean first = true;
+            for(T t: arr) {
+                if(!first) ret.append(", ");
+                first = false;
+                ret.append(ts(t));
+            }
+            ret.append("}");
+            return ret.toString();
+        }
+        private static <T> String ts(Iterable<T> iter) {
+            StringBuilder ret = new StringBuilder();
+            ret.append("{");
+            boolean first = true;
+            for(T t: iter) {
+                if(!first) ret.append(", ");
+                first = false;
+                ret.append(ts(t));
+            }
+            ret.append("}");
+            return ret.toString();
+        }
+        public static void print(Object... o) {
+            if(LOCAL) {
+                System.err.print("Line #"+Thread.currentThread().getStackTrace()[2].getLineNumber()+": [");
+                for(int i = 0; i<o.length; i++) {
+                    if(i!=0) System.err.print(", ");
+                    System.err.print(ts(o[i]));
+                }
+                System.err.println("]");
+            }
         }
     }
 }
