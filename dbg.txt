@@ -1,3 +1,0 @@
-code.cpp:20: warning: ignoring ‘#pragma comment ’ [-Wunknown-pragmas]
-   20 | #pragma comment(linker, "/stack:200000000")
-Line:28 [n] = [10]

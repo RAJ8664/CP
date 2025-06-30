@@ -9,11 +9,12 @@ class AVL_TREE {
     private static BSTNode rootNode;
 
     int height(BSTNode node) {
-        if (node == null) return 0;
+        if (node == null)
+            return 0;
         return node.getHeight();
     }
 
-    /* public static void main(String[] args) {
+    /*  public static void main(String[] args) {
         AVL_TREE avl = new AVL_TREE();
         Scanner sc = new Scanner(System.in);
         int no = sc.nextInt(); //Total number of commands
@@ -39,7 +40,7 @@ class AVL_TREE {
                 System.out.println();
             }
         }
-    } */
+        } */
 
     public void insert(int data) {
         Stack<BSTNode> stack = new Stack<>();
@@ -52,17 +53,15 @@ class AVL_TREE {
             parent = pivotNode;
             pivotNode = pivotNode.getData() > data ? pivotNode.getLeft() : pivotNode.getRight();
         }
-        if (pivotNode != null) {
+        if (pivotNode != null)
             return;
-        }
         pivotNode = new BSTNode(data);
-        if (parent == null) {
+        if (parent == null)
             rootNode = pivotNode;
-        } else if (parent.getData() > data) {
+        else if (parent.getData() > data)
             parent.setLeft(pivotNode);
-        } else {
+        else
             parent.setRight(pivotNode);
-        }
 
         // AVL Tree height recalculation and heightBalanceFactor rotation algorithm
         calculateHeight(parent);
@@ -70,7 +69,6 @@ class AVL_TREE {
         while (!(stack.isEmpty() || stack.peek() == null)) {
             BSTNode grandParent = stack.pop();
             calculateHeight(grandParent);
-
             int balanceFactor = heightBalanceFactor(grandParent);
             if (balanceFactor > 1) {
                 // Insertion is in left subTree
@@ -103,62 +101,54 @@ class AVL_TREE {
     }
 
     private void calculateHeight(final BSTNode node) {
-        if (node == null) {
+        if (node == null)
             return;
-        }
         node.setHeight(Math.max(height(node.getLeft()), height(node.getRight())) + 1);
     }
 
     // heightBalanceFactor of a node is heightOfLeftSubTree - heightOfRightSubTree
     public int heightBalanceFactor(BSTNode node) {
-        if (node == null) {
+        if (node == null)
             return 0;
-        }
         return height(node.getLeft()) - height(node.getRight());
     }
 
     private void leftRotate(BSTNode pivotNode, BSTNode parent) {
-        if (pivotNode == null || pivotNode.getRight() == null) {
+        if (pivotNode == null || pivotNode.getRight() == null)
             return;
-        }
         BSTNode tmpNode = pivotNode.getRight();
         pivotNode.setRight(tmpNode.getLeft());
         tmpNode.setLeft(pivotNode);
-        if (parent == null) {
+        if (parent == null)
             this.rootNode = tmpNode;
-        } else if (parent.getLeft() == pivotNode) {
+        else if (parent.getLeft() == pivotNode)
             parent.setLeft(tmpNode);
-        } else {
+        else
             parent.setRight(tmpNode);
-        }
         calculateHeight(pivotNode);
         calculateHeight(tmpNode);
     }
 
     private void rightRotate(BSTNode pivotNode, BSTNode parent) {
-        if (pivotNode == null || pivotNode.getLeft() == null) {
+        if (pivotNode == null || pivotNode.getLeft() == null)
             return;
-        }
         BSTNode tmpNode = pivotNode.getLeft();
         pivotNode.setLeft(tmpNode.getRight());
         tmpNode.setRight(pivotNode);
-
-        if (parent == null) {
+        if (parent == null)
             rootNode = tmpNode;
-        } else if (parent.getLeft() == pivotNode) {
+        else if (parent.getLeft() == pivotNode)
             parent.setLeft(tmpNode);
-        } else {
+        else
             parent.setRight(tmpNode);
-        }
         calculateHeight(pivotNode);
         calculateHeight(tmpNode);
     }
 
-    public void delete(int data) {
+    public void delete (int data) {
         Stack<BSTNode> stack = new Stack<>();
         BSTNode parent = null;
         BSTNode pivotNode = rootNode;
-
         // Find the pivotNode and its parent.
         while (pivotNode != null && pivotNode.getData() != data) {
             stack.push(parent);
@@ -167,29 +157,28 @@ class AVL_TREE {
         }
         stack.push(parent);
         // if pivotNode not found, return
-        if (pivotNode == null) {
+        if (pivotNode == null)
             return;
-        }
         /*
-         * Deletion Algorithm:
-         *  1. If right of pivotNode is null,
-         *     1.1 Replace pivotNode with its left (may be null or a valid node)
-         *
-         *  2. Else if left of right of pivotNode is null, i.e; pivotNode.right is the inOrder successor
-         *     2.1 left of pivotNode becomes left of right of pivotNode
-         *     2.2 Replace pivotNode with right of pivotNode
-         *
-         *  3. Else Find the inOrder successor of pivotNode along with its parent.
-         *     3.1 right of inOrderSuccessor becomes left of inOrderSuccessor's parent
-         *     3.2 left and right of pivotNode becomes left and right of inOrderSuccessor respectively
-         *     3.3 Replace pivotNode with inOrderSuccessor
-         *
-         */
+            Deletion Algorithm:
+            1. If right of pivotNode is null,
+               1.1 Replace pivotNode with its left (may be null or a valid node)
+
+            2. Else if left of right of pivotNode is null, i.e; pivotNode.right is the inOrder successor
+               2.1 left of pivotNode becomes left of right of pivotNode
+               2.2 Replace pivotNode with right of pivotNode
+
+            3. Else Find the inOrder successor of pivotNode along with its parent.
+               3.1 right of inOrderSuccessor becomes left of inOrderSuccessor's parent
+               3.2 left and right of pivotNode becomes left and right of inOrderSuccessor respectively
+               3.3 Replace pivotNode with inOrderSuccessor
+
+        */
         Queue<BSTNode> queue = new LinkedList<>();
         BSTNode nodeToShift;
-        if (pivotNode.getRight() == null) {
+        if (pivotNode.getRight() == null)
             nodeToShift = pivotNode.getLeft();
-        } else if (pivotNode.getRight().getLeft() == null) {
+        else if (pivotNode.getRight().getLeft() == null) {
             nodeToShift = pivotNode.getRight();
             nodeToShift.setLeft(pivotNode.getLeft());
         } else {
@@ -202,28 +191,23 @@ class AVL_TREE {
                 nodeToShift = nodeToShift.getLeft();
             }
             queue.add(parentOfNodeToShift);
-
             parentOfNodeToShift.setLeft(nodeToShift.getRight());
-
             nodeToShift.setLeft(pivotNode.getLeft());
             nodeToShift.setRight(pivotNode.getRight());
             nodeToShift.setHeight(pivotNode.getHeight());
         }
 
-        if (parent == null) {
+        if (parent == null)
             rootNode = nodeToShift;
-        } else if (parent.getLeft() == pivotNode) {
+        else if (parent.getLeft() == pivotNode)
             parent.setLeft(nodeToShift);
-        } else {
+        else
             parent.setRight(nodeToShift);
-        }
         // Add nodeToShift and all nodes in the queue to stack.
-        if (nodeToShift != null) {
+        if (nodeToShift != null)
             stack.push(nodeToShift);
-        }
-        while (!queue.isEmpty()) {
+        while (!queue.isEmpty())
             stack.push(queue.poll());
-        }
         // AVL Tree height recalculation and heightBalanceFactor rotation algorithm
         while (!(stack.isEmpty() || stack.peek() == null)) {
             BSTNode node = stack.pop();
@@ -261,13 +245,12 @@ class AVL_TREE {
         // Traverse until root reaches to dead end
         while (rootNode != null) {
             // pass right subtree as new tree
-            if (key > rootNode.getData()) {
+            if (key > rootNode.getData())
                 rootNode = rootNode.getRight();
-            }
             // pass left subtree as new tree
-            else if (key < rootNode.getData()) {
+            else if (key < rootNode.getData())
                 rootNode = rootNode.getLeft();
-            } else {
+            else {
                 return 1; // if the key is found return 1
             }
         }
@@ -276,14 +259,17 @@ class AVL_TREE {
 
     // Levelorder Printing.
     private void printTreeLevelOrder(BSTNode rootNode) {
-        if (rootNode == null) return;
+        if (rootNode == null)
+            return;
         Queue<BSTNode> queue = new LinkedList<>();
         queue.add(rootNode);
         while (!queue.isEmpty()) {
             BSTNode obj = queue.poll();
             System.out.print(obj.getData() + "(" + heightBalanceFactor(obj) + ") ");
-            if (obj.getLeft() != null) queue.add(obj.getLeft());
-            if (obj.getRight() != null) queue.add(obj.getRight());
+            if (obj.getLeft() != null)
+                queue.add(obj.getLeft());
+            if (obj.getRight() != null)
+                queue.add(obj.getRight());
         }
     }
 }
@@ -340,13 +326,16 @@ class BSTNode {
     private int balanceNumber(BSTNode node) {
         int L = height(node.getLeft());
         int R = height(node.getRight());
-        if (L - R >= 2) return -1;
-        else if (L - R <= -2) return 1;
+        if (L - R >= 2)
+            return -1;
+        else if (L - R <= -2)
+            return 1;
         return 0;
     }
 
     private int height(BSTNode node) {
-        if (node == null) return 0;
+        if (node == null)
+            return 0;
         return node.getHeight();
     }
 }

@@ -17,7 +17,6 @@ using namespace std;
 #pragma GCC optimize("Ofast")
 #pragma GCC target("avx,avx2,fma")
 #pragma GCC optimize("O3,unroll-loops")
-#pragma comment(linker, "/stack:200000000")
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,tune=native")
 #pragma GCC optimize("Ofast,no-stack-protector,no-stack-protector,fast-math")
 /*****************************************************************************************************************************************/
