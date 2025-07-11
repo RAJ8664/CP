@@ -1,3 +1,5 @@
+package JAVA_Templates;
+
 import java.util.TreeMap;
 
 @SuppressWarnings("serial")
