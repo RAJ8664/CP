@@ -1,4 +1,3 @@
-//import statements
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -14,10 +13,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.Objects;
-import java.util.Queue;
 import java.util.Random;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -29,9 +26,6 @@ public class brute {
     static int mod = (int)(1000000007);  // 998244353 1000000007;
     static long hash_mod = 92233720368547753L;
     static ArrayList<ArrayList<Integer >> adj;
-    static int vis[][];
-
-
 
     /*** Code Starts From Here ***/
     public static void main(String[] args) throws IOException {
@@ -46,83 +40,10 @@ public class brute {
     }
 
     public static void Attack() throws IOException {
-        int n = sc.nextInt();
-        int arr[][] = new int[n][n];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++)
-                arr[i][j] = sc.nextInt();
-        }
 
-        long ans = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++)
-                if (arr[i][j] == -1)
-                    ans = sub(ans, 1);
-                else
-                    ans = add(ans, getAns(arr, i, j));
-        }
-        out.println(ans);
     }
 
-    static long getAns(int arr[][], int startRow, int startCol) {
-        int n = arr.length, m = arr[0].length;
-        long ans = 0;
-        vis = new int[n + 1][m + 1];
-        Queue<Pair> q = new LinkedList<>();
-        q.offer(new Pair(startRow, startCol));
-        int dir[][] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-        vis[startRow][startCol] = 1;
-
-        while (q.size() > 0) {
-            int currRow = q.peek().row, currCol = q.peek().col;
-            q.poll();
-            for (int dire[] : dir) {
-                int newRow = currRow + dire[0];
-                int newCol = currCol + dire[1];
-                if (newRow >= 0 && newCol >= 0 && newRow < n && newCol < m && vis[newRow][newCol] == 0 && arr[newRow][newCol] != -1) {
-                    vis[newRow][newCol] = 1;
-                    q.offer(new Pair(newRow, newCol));
-                }
-            }
-        }
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (vis[i][j] == 0 && arr[i][j] != -1) {
-                    if (arr[i][j] % arr[startRow][startCol] == 0)
-                        ans = add(ans, arr[i][j]);
-                }
-            }
-        }
-        return ans;
-    }
-
-    static class Pair {
-        int row, col;
-        public Pair(int row, int col) {
-            this.row = row;
-            this.col = col;
-        }
-        @Override
-        public String toString() {
-            return "(" + row + " " + col + ")";
-        }
-        @Override
-        public boolean equals(Object o) {
-            if (this == o)
-                return true;
-            if (o == null || getClass() != o.getClass())
-                return false;
-            Pair pair = (Pair) o;
-            return row == pair.row && col == pair.col;
-        }
-        @Override
-        public int hashCode() {
-            return Objects.hash(row, col);
-        }
-    }
-
-//Reader
+    //Reader
     static class Reader {
         private final int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;

@@ -27,33 +27,14 @@ mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 ll rand(ll l, ll r) { return uniform_int_distribution<ll>(l, r)(rng); }
 
 void solve() {
-    int n = rand(10, 10);
-    set<int> st;
-    vector<vector<int>> v(n, vector<int>(n));
-    cout << n << " " << n << endl;
+    int n = rand(1, 100), maxi = rand(1, 20), mini = rand(1, 20);
+    cout << n << " " << maxi << " " << mini << endl;
+    vector<int> arr(n);
     for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            int x = rand(-1, 200);
-            while ((x == 0 || x % 2 == 1) || st.count(x) > 0)
-                x = rand(-1, 200);
-            st.insert(x);
-            v[i][j] = x;
-        }
+        int current = rand(1, 25);
+        cout << current << " ";
     }
-    int y = 0;
-    for (int i = n - 1; i >= 0; i--) {
-        v[i][y] = -1;
-        y++;
-    }
-    for (int i = 0; i < n; i++) {
-        v[i][i] = -1;
-    }
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            cout << v[i][j] << " ";
-        }
-        cout << endl;
-    }
+    cout << endl;
 }
 
 int main() {
