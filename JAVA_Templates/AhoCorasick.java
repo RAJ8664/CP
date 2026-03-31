@@ -7,8 +7,6 @@
 
 */
 
-package JAVA_Templates;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -145,9 +143,8 @@ class AhoCorasick {
 
         private List<List<Integer >> initializePositionByStringIndexValue() {
             List<List<Integer >> positionByStringIndexValue = new ArrayList<>(patterns.length); // Stores positions where patterns are found in the text
-            for (int i = 0; i < patterns.length; i++) {
+            for (int i = 0; i < patterns.length; i++)
                 positionByStringIndexValue.add(new ArrayList<>());
-            }
             return positionByStringIndexValue;
         }
 
@@ -165,12 +162,10 @@ class AhoCorasick {
                 if (parent.getChild().containsKey(ch)) {
                     parent = parent.getChild().get(ch); // Update the current node to the child node
                     positionRecorder.recordPatternPositions(parent, i); // Use the method in PatternPositionRecorder to record positions
-                }
-                else {
+                } else {
                     // If no child node exists for the character, backtrack using suffix links
-                    while (parent != root && !parent.getChild().containsKey(ch)) {
+                    while (parent != root && !parent.getChild().containsKey(ch))
                         parent = parent.getSuffixLink();
-                    }
                     if (parent.getChild().containsKey(ch)) {
                         i--; // Decrement i to reprocess the same character
                     }

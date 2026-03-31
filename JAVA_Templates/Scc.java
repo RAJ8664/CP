@@ -1,5 +1,3 @@
-package JAVA_Templates;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -121,8 +119,7 @@ class TarjansAlgorithm {
                 stronglyConnCompsUtil(vertex, lowTime, insertionTime, isInStack, st, graph);
                 // Update low-link value
                 lowTime[u] = Math.min(lowTime[u], lowTime[vertex]);
-            }
-            else if (isInStack[vertex]) {
+            } else if (isInStack[vertex]) {
                 // Vertex is in the stack; update low-link value
                 lowTime[u] = Math.min(lowTime[u], insertionTime[vertex]);
             }

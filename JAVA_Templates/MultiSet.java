@@ -1,5 +1,3 @@
-package JAVA_Templates;
-
 import java.util.Comparator;
 import java.util.TreeMap;
 import java.util.TreeSet;

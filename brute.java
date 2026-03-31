@@ -25,7 +25,7 @@ public class brute {
     static Debug dbg = new Debug();
     static int mod = (int)(1000000007);  // 998244353 1000000007;
     static long hash_mod = 92233720368547753L;
-    static ArrayList<ArrayList<Integer >> adj;
+    static ArrayList<ArrayList<Integer>> adj;
 
     /*** Code Starts From Here ***/
     public static void main(String[] args) throws IOException {
@@ -40,10 +40,16 @@ public class brute {
     }
 
     public static void Attack() throws IOException {
-
+        int n = sc.nextInt();
+        int arr[] = new int[n];
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++)
+            arr[i] = sc.nextInt();
+        for (int ele : arr)
+            map.put(ele, map.getOrDefault(ele, 0) + 1);
     }
 
-    //Reader
+    // Reader
     static class Reader {
         private final int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
@@ -171,7 +177,7 @@ public class brute {
         }
     }
 
-//Fast Power
+    // Fast Power
     static long fast_pow(long a, long p, long mod) {
         long res = 1;
         while (p > 0) {
@@ -195,7 +201,7 @@ public class brute {
         return mul(half, mul(half, base));
     }
 
-// Factorials and Inverse Factorials;
+    // Factorials and Inverse Factorials;
     static long[] factorials = new long[2_000_001];
     static long[] invFactorials = new long[2_000_001];
     static boolean[] isPrime;
@@ -215,7 +221,7 @@ public class brute {
         return mul(factorials[n], mul(invFactorials[k], invFactorials[n - k]));
     }
 
-// Prime Generator;
+    // Prime Generator;
     static void Generate_Primes(int upto) {
         // Sieve of Eratosthenes:
         isPrime = new boolean[upto + 1];
@@ -238,7 +244,7 @@ public class brute {
         }
     }
 
-// Mod Maths
+    // Mod Maths
     static long Div(long x, long y) {
         return mul(x, modinv(y));
     }
@@ -280,7 +286,7 @@ public class brute {
         return (long)((long)((a % mod) * 1L * (b % mod)) % mod);
     }
 
-// Input and Output
+    // Input and Output
     public static void READING() {
         if (System.getProperty("ONLINE_JUDGE") == null) {
             try {
@@ -293,15 +299,14 @@ public class brute {
 
     public static void ERROR() {
         try {
-            PrintStream fileOut =
-                new PrintStream(new FileOutputStream("dbg.txt", false), true, "UTF-8");
+            PrintStream fileOut = new PrintStream(new FileOutputStream("dbg.txt", false), true, "UTF-8");
             System.setErr(fileOut);
         } catch (FileNotFoundException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
 
-//Sorting
+    // Sorting
     public static void sort(int[] arr) {
         // because Arrays.sort() uses quicksort which is dumb
         // Collections.sort() uses merge sort
@@ -354,10 +359,11 @@ public class brute {
         }
     }
 
-//Count Map
+    // Count Map
     @SuppressWarnings("serial")
     static class CountMap<T> extends TreeMap<T, Integer> {
-        CountMap() {}
+        CountMap() {
+        }
 
         CountMap(T[] arr) {
             this.putCM(arr);
@@ -393,7 +399,7 @@ public class brute {
         }
     }
 
-//DSU
+    // DSU
     static class DSU {
         int[] Parent, Group_Size;
         int Number_of_Nodes, Number_of_Groups, Max_Group;
@@ -439,25 +445,23 @@ public class brute {
         }
     }
 
-//String Hashing
+    // String Hashing
     static class Hashing {
         long[] hash1, hash2;
         long[] inv1, inv2;
         int n;
         static int muresiplier = 43;
         static final Random rnd = new Random();
-        static final int mod1 =
-            BigInteger.valueOf((int)(1e9 + rnd.nextInt((int) 1e9)))
-            .nextProbablePrime()
-            .intValue();
-        static final int mod2 =
-            BigInteger.valueOf((int)(1e9 + rnd.nextInt((int) 1e9)))
-            .nextProbablePrime()
-            .intValue();
-        static final int invMuresiplier1 =
-            BigInteger.valueOf(muresiplier).modInverse(BigInteger.valueOf(mod1)).intValue();
-        static final int invMuresiplier2 =
-            BigInteger.valueOf(muresiplier).modInverse(BigInteger.valueOf(mod2)).intValue();
+        static final int mod1 = BigInteger.valueOf((int)(1e9 + rnd.nextInt((int) 1e9)))
+                                .nextProbablePrime()
+                                .intValue();
+        static final int mod2 = BigInteger.valueOf((int)(1e9 + rnd.nextInt((int) 1e9)))
+                                .nextProbablePrime()
+                                .intValue();
+        static final int invMuresiplier1 = BigInteger.valueOf(muresiplier).modInverse(BigInteger.valueOf(mod1))
+                                           .intValue();
+        static final int invMuresiplier2 = BigInteger.valueOf(muresiplier).modInverse(BigInteger.valueOf(mod2))
+                                           .intValue();
 
         public Hashing(String s) {
             n = s.length();
@@ -489,7 +493,7 @@ public class brute {
         }
     }
 
-//Trie
+    // Trie
     static class Trie {
         class Node {
             Node[] children;
@@ -527,7 +531,7 @@ public class brute {
         }
     }
 
-//MultiSet
+    // MultiSet
     static class MultiSet<T> {
         TreeMap<T, Integer> frequency;
         TreeSet<T> set;
@@ -627,12 +631,13 @@ public class brute {
         }
     }
 
-//MultiTreeSet
+    // MultiTreeSet
     static class MultiTreeSet<E> {
         TreeMap<E, Integer> freqTreeMap = new TreeMap<E, Integer>();
         int size;
 
-        public MultiTreeSet() {}
+        public MultiTreeSet() {
+        }
 
         public MultiTreeSet(Collection<? extends E> c) {
             for (E element : c)
@@ -715,7 +720,7 @@ public class brute {
         }
     }
 
-//Debugger
+    // Debugger
     static class Debug {
         public static boolean LOCAL = getLocal();
 
@@ -797,5 +802,3 @@ public class brute {
     }
 
 }
-
-

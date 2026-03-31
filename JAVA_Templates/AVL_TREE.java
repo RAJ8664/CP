@@ -1,5 +1,3 @@
-package JAVA_Templates;
-
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;

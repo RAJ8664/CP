@@ -1,5 +1,3 @@
-package JAVA_Templates;
-
 import java.math.BigInteger;
 import java.util.Random;
 

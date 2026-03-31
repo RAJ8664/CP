@@ -1,5 +1,3 @@
-package JAVA_Templates;
-
 class DSU {
     int[] Parent, Group_Size;
     int Number_of_Nodes, Number_of_Groups, Max_Group;

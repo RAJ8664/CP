@@ -1,4 +1,3 @@
-package JAVA_Templates;
 class segmentTree {
     static Node seg[];
     static int arr[];

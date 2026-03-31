@@ -1,5 +1,3 @@
-package JAVA_Templates;
-
 /**
     The BFPRT (Median of Medians) algorithm implementation.
     It provides a way to find the k-th smallest element in an unsorted array

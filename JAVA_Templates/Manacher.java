@@ -1,5 +1,3 @@
-package JAVA_Templates;
-
 /**
     Wikipedia: https://en.wikipedia.org/wiki/Longest_palindromic_substring#Manacher's_algorithm
 */

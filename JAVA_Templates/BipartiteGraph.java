@@ -1,5 +1,3 @@
-package JAVA_Templates;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -48,19 +46,15 @@ class BipartiteGraphDFS {
     */
 
     private static boolean bipartite(int v, ArrayList<ArrayList<Integer >> adj, int[] color, int node) {
-        if (color[node] == -1) {
+        if (color[node] == -1)
             color[node] = 1;
-        }
         for (Integer it : adj.get(node)) {
             if (color[it] == -1) {
                 color[it] = 1 - color[node];
-                if (!bipartite(v, adj, color, it)) {
+                if (!bipartite(v, adj, color, it))
                     return false;
-                }
-            }
-            else if (color[it] == color[node]) {
+            } else if (color[it] == color[node])
                 return false;
-            }
         }
         return true;
     }

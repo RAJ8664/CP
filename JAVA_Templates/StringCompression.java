@@ -1,5 +1,3 @@
-package JAVA_Templates;
-
 /**
     References : https://en.wikipedia.org/wiki/Run-length_encoding
     String compression algorithm deals with encoding the string, that is, shortening the size of the string

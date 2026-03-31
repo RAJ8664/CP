@@ -1,5 +1,3 @@
-package JAVA_Templates;
-
 import java.util.Collection;
 import java.util.TreeMap;
 

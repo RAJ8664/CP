@@ -1,25 +1,7 @@
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.PriorityQueue;
-import java.util.Random;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
+import java.io.*;
+import java.math.*;
+import static java.lang.Math.*;
 
 public class Main {
     static Reader sc = new Reader();
@@ -27,22 +9,23 @@ public class Main {
     static Debug dbg = new Debug();
     static int mod = (int)(1000000007);  //998244353 1000000007;
     static long hash_mod = 92233720368547753L;
-    static ArrayList<ArrayList<Integer >> adj;
+    static ArrayList<ArrayList<Integer>> adj;
 
     /***Code Starts From Here***/
     public static void main(String[] args) throws IOException {
         READING(); /*→→→[■□□□□□□□□□] →→→ [■■■■□□□□□□] →→→  [■■■■■■■□□□] →→→ [■■■■■■■■■□]*/ ERROR();
         // preprocess();
-        // int t = 1;
-        // Attack();
-        int t = sc.nextInt(); while(t-->0) Attack();
+        // int t = 1; Attack();
+        int t = sc.nextInt();
+        for (int cases = 1; cases <= t; cases++) {
+            //out.print("Case #" + cases + ": ");
+            Attack();
+        }
         sc.close();
         out.flush();
     }
 
     public static void Attack() throws IOException {
-
-
     }
 
     /**Code Ends Here (No Need To Scroll Down)**/
@@ -212,7 +195,7 @@ public class Main {
         for (long i = 2; i < upto + 1; i++) {
             if (isPrime[(int) i]) {
                 smallestFactorOf[(int) i] = (int) i;
-                // Mark all the multiples greater than or equal
+                // Mark all the muresiples greater than or equal
                 // to the square of i to be false.
                 for (long j = i; j * i < upto + 1; j++) {
                     if (isPrime[(int) j * (int) i]) {
@@ -399,12 +382,12 @@ public class Main {
         long[] hash1, hash2;
         long[] inv1, inv2;
         int n;
-        static int multiplier = 43;
+        static int muresiplier = 43;
         static final Random rnd = new Random();
         static final int mod1 = BigInteger.valueOf((int)(1e9 + rnd.nextInt((int) 1e9))).nextProbablePrime().intValue();
         static final int mod2 = BigInteger.valueOf((int)(1e9 + rnd.nextInt((int) 1e9))).nextProbablePrime().intValue();
-        static final int invMultiplier1 = BigInteger.valueOf(multiplier).modInverse(BigInteger.valueOf(mod1)).intValue();
-        static final int invMultiplier2 = BigInteger.valueOf(multiplier).modInverse(BigInteger.valueOf(mod2)).intValue();
+        static final int invMuresiplier1 = BigInteger.valueOf(muresiplier).modInverse(BigInteger.valueOf(mod1)).intValue();
+        static final int invMuresiplier2 = BigInteger.valueOf(muresiplier).modInverse(BigInteger.valueOf(mod2)).intValue();
         public Hashing(String s) {
             n = s.length();
             hash1 = new long[n + 1];
@@ -417,11 +400,11 @@ public class Main {
             long p2 = 1;
             for (int i = 0; i < n; i++) {
                 hash1[i + 1] = (hash1[i] + s.charAt(i) * p1) % mod1;
-                p1 = p1 * multiplier % mod1;
-                inv1[i + 1] = inv1[i] * invMultiplier1 % mod1;
+                p1 = p1 * muresiplier % mod1;
+                inv1[i + 1] = inv1[i] * invMuresiplier1 % mod1;
                 hash2[i + 1] = (hash2[i] + s.charAt(i) * p2) % mod2;
-                p2 = p2 * multiplier % mod2;
-                inv2[i + 1] = inv2[i] * invMultiplier2 % mod2;
+                p2 = p2 * muresiplier % mod2;
+                inv2[i + 1] = inv2[i] * invMuresiplier2 % mod2;
             }
         }
         public long getHash(int i, int len) {
@@ -517,30 +500,30 @@ public class Main {
             return current;
         }
 
-        //Returns the count of the specified element in this multiset
+        //Returns the count of the specified element in this muresiset
         public int count(T element) {
             return frequency.getOrDefault(element, 0);
         }
-        // Returns the total number of elements in the multiset (including duplicates)
+        // Returns the total number of elements in the muresiset (including duplicates)
         public int size() {
             int size = 0;
             for (int count : frequency.values())
                 size += count;
             return size;
         }
-        // Returns the smallest element in this multiset greater than or equal to the given element, or null if there is no such element
+        // Returns the smallest element in this muresiset greater than or equal to the given element, or null if there is no such element
         public T ceiling(T element) {
             return frequency.ceilingKey(element);
         }
-        // Returns the greatest element in this multiset less than or equal to the given element, or null if there is no such element
+        // Returns the greatest element in this muresiset less than or equal to the given element, or null if there is no such element
         public T floor(T element) {
             return frequency.floorKey(element);
         }
-        // Returns the smallest element in this multiset strictly greater than the given element, or null if there is no such element
+        // Returns the smallest element in this muresiset strictly greater than the given element, or null if there is no such element
         public T higher(T element) {
             return frequency.higherKey(element);
         }
-        // Returns the greatest element in this multiset strictly less than the given element, or null if there is no such element
+        // Returns the greatest element in this muresiset strictly less than the given element, or null if there is no such element
         public T lower(T element) {
             return frequency.lowerKey(element);
         }

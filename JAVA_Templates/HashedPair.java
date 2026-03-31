@@ -1,5 +1,3 @@
-package JAVA_Templates;
-
 import java.util.Objects;
 
 class Unique_Pair {
