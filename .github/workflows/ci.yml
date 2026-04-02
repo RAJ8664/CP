@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Prepare Python virtualenv and install dev requirements
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+        shell: bash
+      - name: Show Python info (debug)
+        run: |
+          source .venv/bin/activate
+          python -V
+          python -c "import sys, pprint; pprint.pprint(sys.path)"
+        shell: bash
+      - name: Run pytest
+        run: |
+          source .venv/bin/activate
+          pytest -q
+        shell: bash
+      - name: Set up Java (JDK)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Compile and run Java tests
+        run: |
+          mkdir -p out
+          javac -d out JAVA_Templates/*.java tests/java/*.java
+          # run with assertions enabled (-ea)
+          java -ea -cp out TestDSU
+        shell: bash

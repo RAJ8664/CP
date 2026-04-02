@@ -40,13 +40,6 @@ public class brute {
     }
 
     public static void Attack() throws IOException {
-        int n = sc.nextInt();
-        int arr[] = new int[n];
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < n; i++)
-            arr[i] = sc.nextInt();
-        for (int ele : arr)
-            map.put(ele, map.getOrDefault(ele, 0) + 1);
     }
 
     // Reader

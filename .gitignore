@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+
+# Editor
+.vscode/
+.idea/
+
+# Compiled binaries
+a.out
+*.class
+
+# Outputs
+output.txt
+dbg.txt
+brute_output.txt
+
+# Common unwanted files
+.env
+.env.local
+.env.*
+.venv/
+venv/
+out/
+.pytest_cache/
+.DS_Store
+*.log
+credentials.json
+secrets.json

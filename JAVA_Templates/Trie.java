@@ -24,14 +24,11 @@ class TrieNode {
 
 /**
     Trie Data structure implementation without any libraries.
-    <p>
     The Trie (also known as a prefix tree) is a special tree-like data structure
     that is used to store a dynamic set or associative array where the keys are
     usually strings. It is highly efficient for prefix-based searches.
-    <p>
     This implementation supports basic Trie operations like insertion, search,
     and deletion.
-    <p>
     Each node of the Trie represents a character and has child nodes for each
     possible character.
 
@@ -53,7 +50,6 @@ public class Trie {
 
     /**
         Inserts a word into the Trie.
-        <p>
         The method traverses the Trie from the root, character by character, and adds
         nodes if necessary. It marks the last node of the word as an end node.
 
@@ -77,7 +73,6 @@ public class Trie {
 
     /**
         Searches for a word in the Trie.
-        <p>
         This method traverses the Trie based on the input word and checks whether
         the word exists. It returns true if the word is found and its end flag is
         true.
@@ -101,7 +96,6 @@ public class Trie {
 
     /**
         Deletes a word from the Trie.
-        <p>
         The method traverses the Trie to find the word and marks its end flag as
         false.
         It returns true if the word was successfully deleted, false if the word
@@ -131,7 +125,6 @@ public class Trie {
 
     /**
         Counts the number of words in the trie
-        <p>
         The method traverses the Trie and counts the number of words.
 
         @return count of words
